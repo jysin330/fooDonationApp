@@ -18,10 +18,6 @@ def meals(request):
     return render(request, "fooDonationApp\meals.html")
 
 
-def category(request):
-    return render(request, "fooDonationApp\category.html")
-
-
 def Receive(request):
     return render(request, "fooDonationApp\Receive.html")
 
