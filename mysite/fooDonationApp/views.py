@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Donate
 
 
 # Create your views here.
@@ -11,7 +12,23 @@ def About(request):
 
 
 def donate(request):
-    return render(request, "fooDonationApp\donate.html")
+    # post request --->
+    # donarEmail = request.POST.get("email")
+    donarName = request.POST.get("fname")
+    donarPhone = request.POST.get("phoneNum")
+    foodItem = request.POST.get("FoodName")
+    des = request.POST.get("description")
+    donarAddress = request.POST.get("address")
+    foodImage = request.POST.get("foodImage")
+    # print(donarEmail, donarName, donarPhone, foodItem)
+    Donate.objects.create(
+        donarName=donarName,
+        phoneNum=donarPhone,
+        foodItem=foodItem,
+        fooDescription=des,
+        address=donarAddress,
+    )
+    return render(request, "fooDonationApp\donate.html", {})
 
 
 def meals(request):
