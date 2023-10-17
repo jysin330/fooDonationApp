@@ -13,22 +13,26 @@ def About(request):
 
 def donate(request):
     # post request --->
-    # donarEmail = request.POST.get("email")
-    donarName = request.POST.get("fname")
-    donarPhone = request.POST.get("phoneNum")
-    foodItem = request.POST.get("FoodName")
-    des = request.POST.get("description")
-    donarAddress = request.POST.get("address")
-    foodImage = request.POST.get("foodImage")
-    # print(donarEmail, donarName, donarPhone, foodItem)
-    Donate.objects.create(
-        donarName=donarName,
-        phoneNum=donarPhone,
-        foodItem=foodItem,
-        fooDescription=des,
-        address=donarAddress,
-    )
-    return render(request, "fooDonationApp\donate.html", {})
+    if request.method == "POST":
+        donarName = request.POST.get("fname")
+        donarEmail = request.POST.get("email")
+        donarPhone = request.POST.get("phoneNum")
+        foodItem = request.POST.get("FoodName")
+        des = request.POST.get("description")
+        donarAddress = request.POST.get("address")
+        foodImage = request.POST.get("foodImage")
+        # print(donarEmail, donarName, donarPhone, foodItem)
+
+        Donate.objects.create(
+            donarName=donarName,
+            donarEmail=donarEmail,
+            phoneNum=donarPhone,
+            foodItem=foodItem,
+            fooDescription=des,
+            address=donarAddress,
+            image=foodImage,
+        )
+    return render(request, "fooDonationApp\donate.html")
 
 
 def meals(request):
