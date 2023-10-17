@@ -57,7 +57,7 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
             BASE_DIR / "fooDonationApp" / "templates",
-            # C:\Users\jyoti\Documents\django\pythondjango\FOOD_DONATION_APP\mysite\fooDonationApp\templates,
+           
         ],
         "APP_DIRS": True,
         "OPTIONS": {

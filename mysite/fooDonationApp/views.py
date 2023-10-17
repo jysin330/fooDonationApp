@@ -24,3 +24,7 @@ def Receive(request):
 
 def search(request):
     return render(request, "fooDonationApp\search.html")
+
+
+def history(request):
+    return render(request, "fooDonationApp\history.html")
