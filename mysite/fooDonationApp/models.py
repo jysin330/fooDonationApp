@@ -5,7 +5,7 @@ from django.db import models
 class Donate(models.Model):
     donar_id = models.AutoField
     donarName = models.CharField(max_length=20)
-    phoneNum = models.IntegerField(max_length=14)
+    phoneNum = models.CharField(max_length=70, default="")
     foodItem = models.CharField(max_length=50)
     fooDescription = models.CharField(max_length=1000)
     address = models.CharField(max_length=100)
