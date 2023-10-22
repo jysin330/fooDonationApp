@@ -5,6 +5,7 @@ from django.db import IntegrityError
 # Create your models here.
 class Donate(models.Model):
     donar_id = models.AutoField
+    category = models.CharField(max_length=140, null=True)
     donarName = models.CharField(max_length=20)
     donarEmail = models.EmailField(max_length=70, default="")
     phoneNum = models.CharField(max_length=70, default="")

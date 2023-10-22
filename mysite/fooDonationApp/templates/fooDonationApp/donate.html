@@ -4,14 +4,14 @@
 <div style="margin-top: 20px;">
 <label for="Meals" style="font-weight: bold; font-size: 40px;"> Category </label>
 <select name="Category" id="Meals" form="category" style="font-weight:500; font-size: 15px; border:solid 2px black; padding:4px; margin-bottom: 4px">
-  <option value="raw">Raw Food</option>
+  <option value="raw" name >Raw Food</option>
   <option value="cooked">Cooked Food</option>
   <option value="packed">Packed Food</option>
   
 </select>
 <form action="." method="post" id="category"> {% csrf_token %}
    
-    <input type="email" id="email" name="email" placeholder="Email" style="font-size: 20px; margin-top:30px ; margin-bottom:10px" >
+    <input type="email" id="email"  name="email" placeholder="Email" style="font-size: 20px; margin-top:30px ; margin-bottom:10px" >
     <br/> 
     <input type="text" id="fname" name="fname" placeholder="Donar Name" style="font-size: 20px;  margin-bottom:10px" >
     <br/>

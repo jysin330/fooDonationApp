@@ -15,6 +15,7 @@ def donate(request):
     # post request --->
     if request.method == "POST":
         donarName = request.POST.get("fname")
+        category = request.POST.get("Category")
         donarEmail = request.POST.get("email")
         donarPhone = request.POST.get("phoneNum")
         foodItem = request.POST.get("FoodName")
@@ -24,6 +25,7 @@ def donate(request):
         # print(donarEmail, donarName, donarPhone, foodItem)
 
         Donate.objects.create(
+            category=category,
             donarName=donarName,
             donarEmail=donarEmail,
             phoneNum=donarPhone,
