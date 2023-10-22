@@ -2,5 +2,9 @@
 
 
 {% block content %}
-<h1>This is meals page</h1>
+{% for x in object%}
+
+<img src="{{x.image}}" alt="" >
+
+{%endfor%}
 {% endblock %}

@@ -38,7 +38,11 @@ def donate(request):
 
 
 def meals(request):
-    return render(request, "fooDonationApp\meals.html")
+    meal_object = Donate.objects.all()
+    # meal_query = meal_object
+    print(meal_object)
+    obj = {"object": meal_object}
+    return render(request, "fooDonationApp\meals.html", obj)
 
 
 def Receive(request):
