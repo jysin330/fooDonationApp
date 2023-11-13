@@ -3,8 +3,7 @@
 
 {% block content %}
 {% for x in object%}
-
-<img src="{{x.image}}" alt="" >
+<h1><a href="/meals/{{x.id}}">{{x.foodItem}}</a></h1>
 
 {%endfor%}
 {% endblock %}

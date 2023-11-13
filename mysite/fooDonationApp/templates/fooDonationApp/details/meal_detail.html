@@ -1,0 +1,14 @@
+{% extends 'fooDonationApp\base.html' %}
+
+
+{% block content %}
+{% for x in object%}
+<p style="font-size: 20px;"> <span style=" font-weight :bold">Food Item Name - </span>{{x.foodItem}}</p>
+<p style="font-size: 20px;"> <span style=" font-weight :bold">Food Description - </span>{{x.fooDescription}}</p>
+<p style="font-size: 20px;"> <span style=" font-weight :bold">Category - </span>{{x.category}}</p>
+<p style="font-size: 20px;"> <span style=" font-weight :bold">Donar Name - </span>{{x.donarName}}</p>
+<p style="font-size: 20px;"> <span style=" font-weight :bold">Donar Number - </span>{{x.phoneNum}}</p>
+<p style="font-size: 20px;"> <span style=" font-weight :bold">Donar Address - </span>{{x.address}}</p>
+
+{%endfor%}
+{% endblock %}
