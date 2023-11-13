@@ -53,6 +53,10 @@ def meals_detail(request, id):
     return render(request, "fooDonationApp\details\meal_detail.html", obj)
 
 
+def request_meal(request):
+    return render(request, "fooDonationApp\details\Request_form.html", {})
+
+
 def Receive(request):
     return render(request, "fooDonationApp\Receive.html")
 
