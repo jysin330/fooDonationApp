@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Donate
+from .models import Donate, ReceiverUser
 
 
 # Create your views here.
@@ -54,10 +54,24 @@ def meals_detail(request, id):
 
 
 def request_meal(request, id):
-    # meal_object = Donate.objects.all()
     meal_object = Donate.objects.all().filter(id=id)
-    print(meal_object)
-    obj = {"object": meal_object}
+    if request.method == "POST":
+        receiver_meal = request.POST.get("foodItemName")
+        receiver_name = request.POST.get("receiverName")
+        receiver_email = request.POST.get("receiverEmail")
+        receiver_num = request.POST.get("receiverNumber")
+        receiver_address = request.POST.get("receiverAddress")
+        des = request.POST.get("receivertext")
+        b = ReceiverUser(
+            receiver_meal=receiver_meal,
+            receiver_name=receiver_name,
+            receiver_email=receiver_email,
+            receiver_num=receiver_num,
+            receiver_address=receiver_address,
+            des=des,
+        )
+        b.save()
+    obj = {"object": meal_object, "created": True}
 
     return render(request, "fooDonationApp\details\Request_form.html", obj)
 

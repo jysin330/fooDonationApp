@@ -2,31 +2,37 @@
 
 {% block content %}
 
-
 <h1>Welcome to request for Meal</h1>
-{{x.foodItem}}
+
+
+{% for x in object%}
 <div style="margin-top: 20px;">
-    <select name="foodItem" id="Meals" form="category" style="font-weight:500; font-size: 15px; border:solid 2px black; padding:4px; margin-bottom: 4px">
-        {% for x in object%}
+    <select name="foodItemName" id="Meal" form="requestForm" style="font-weight:500; font-size: 15px; border:solid 2px black; padding:4px; margin-bottom: 4px">
         <option value="{{x.foodItem}}" name >{{x.foodItem}}</option>
-        {%endfor %}
+     
         
     </select>
-<form action="." method="post" id="category">
-{%csrf_token%}
+
+
+
+<form action="/request_meal/{{x.id}}" method="post" id="requestForm"> {% csrf_token %}
+
 {{object.id}}
-<input type="text" style="margin-bottom: 10px; padding: 5px;" value="" placeholder="Receiver Name">
+<input type="text" style="margin-bottom: 10px; padding: 5px;"  placeholder="Receiver Name" name="receiverName" id="receiverName">
 <br/>
-<input type="email" style="margin-bottom: 10px; padding: 5px;" placeholder="Receiver Email">
+<input type="email" style="margin-bottom: 10px; padding: 5px;" placeholder="Receiver Email" name="receiverEmail" id="receiverEmail">
 <br/>
-<input type="phone" style="margin-bottom: 10px; padding: 5px;" placeholder="Receiver Number">
+<input type="phone" style="margin-bottom: 10px; padding: 5px;" placeholder="Receiver Number" name="receiverNumber" id="receiverNumber">
 <br/>
-<input type="address" style="margin-bottom: 10px; padding: 5px;" placeholder="Receiver Address">
+<input type="address" style="margin-bottom: 10px; padding: 5px;" placeholder="Receiver Address" name="receiverAddress" id="receiverAddress">
 <br/>
-<textarea name="" style="margin-bottom: 10px; padding: 5px; height: 50px" placeholder="Verify yourself how you will use food?"></textarea>
+
+<textarea style="margin-bottom: 10px; padding: 5px; height: 50px" name="receivertext" placeholder="Verify yourself how you will use food?"></textarea>
 <br/>
 <button type="submit">Submit Request</button>
 
 
 </form>
+{%endfor %}
+
 {% endblock content%}

@@ -18,11 +18,11 @@ class Donate(models.Model):
         return self.foodItem
 
 
-class Receiver(models.Model):
+class ReceiverUser(models.Model):
     receiver_id = models.AutoField
-    food_item = models.CharField(max_length=140, null=True)
-    receiver_name = models.CharField(max_length=50)
-    receiver_email = models.CharField(max_length=70, default="")
-    receiver_num = models.CharField(max_length=13, default="")
-    receiver_address = models.CharField(max_length=100)
-    verify_des = models.CharField(max_length=500)
+    receiver_meal = models.CharField(max_length=30, null=True)
+    receiver_name = models.CharField(max_length=30)
+    receiver_num = models.CharField(max_length=10, default="")
+    receiver_email = models.CharField(max_length=50, default="")
+    receiver_address = models.CharField(max_length=70)
+    des = models.TextField()

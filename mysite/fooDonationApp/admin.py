@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Donate, Receiver
+from .models import Donate, ReceiverUser
 
 # Register your models here.
 admin.site.register(Donate)
-admin.site.register(Receiver)
+admin.site.register(ReceiverUser)
