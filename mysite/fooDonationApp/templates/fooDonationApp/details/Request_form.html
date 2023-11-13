@@ -6,7 +6,7 @@
 <h1>Welcome to request for Meal</h1>
 {{x.foodItem}}
 <div style="margin-top: 20px;">
-    <select name="Category" id="Meals" form="category" style="font-weight:500; font-size: 15px; border:solid 2px black; padding:4px; margin-bottom: 4px">
+    <select name="foodItem" id="Meals" form="category" style="font-weight:500; font-size: 15px; border:solid 2px black; padding:4px; margin-bottom: 4px">
         {% for x in object%}
         <option value="{{x.foodItem}}" name >{{x.foodItem}}</option>
         {%endfor %}
@@ -15,17 +15,17 @@
 <form action="." method="post" id="category">
 {%csrf_token%}
 {{object.id}}
-<input type="text" style="margin-bottom: 10px; padding: 5px;" value="" placeholder="Reciever Name">
+<input type="text" style="margin-bottom: 10px; padding: 5px;" value="" placeholder="Receiver Name">
 <br/>
-<input type="email" style="margin-bottom: 10px; padding: 5px;" placeholder="Reciever Email">
+<input type="email" style="margin-bottom: 10px; padding: 5px;" placeholder="Receiver Email">
 <br/>
-<input type="phone" style="margin-bottom: 10px; padding: 5px;" placeholder="Reciever Number">
+<input type="phone" style="margin-bottom: 10px; padding: 5px;" placeholder="Receiver Number">
 <br/>
-<input type="address" style="margin-bottom: 10px; padding: 5px;" placeholder="Reciever Address">
+<input type="address" style="margin-bottom: 10px; padding: 5px;" placeholder="Receiver Address">
 <br/>
 <textarea name="" style="margin-bottom: 10px; padding: 5px; height: 50px" placeholder="Verify yourself how you will use food?"></textarea>
 <br/>
-<button type="submit">Submit Request</button>s
+<button type="submit">Submit Request</button>
 
 
 </form>
