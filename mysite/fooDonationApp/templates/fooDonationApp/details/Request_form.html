@@ -4,11 +4,18 @@
 
 
 <h1>Welcome to request for Meal</h1>
-
-<form action="/request_meal/" method="post">
+{{x.foodItem}}
+<div style="margin-top: 20px;">
+    <select name="Category" id="Meals" form="category" style="font-weight:500; font-size: 15px; border:solid 2px black; padding:4px; margin-bottom: 4px">
+        {% for x in object%}
+        <option value="{{x.foodItem}}" name >{{x.foodItem}}</option>
+        {%endfor %}
+        
+    </select>
+<form action="." method="post" id="category">
 {%csrf_token%}
-
-<input type="text" style="margin-bottom: 10px; padding: 5px;" placeholder="Reciever Name">
+{{object.id}}
+<input type="text" style="margin-bottom: 10px; padding: 5px;" value="" placeholder="Reciever Name">
 <br/>
 <input type="email" style="margin-bottom: 10px; padding: 5px;" placeholder="Reciever Email">
 <br/>
@@ -18,7 +25,7 @@
 <br/>
 <textarea name="" style="margin-bottom: 10px; padding: 5px; height: 50px" placeholder="Verify yourself how you will use food?"></textarea>
 <br/>
-<button type="submit">Submit Request</button>
+<button type="submit">Submit Request</button>s
 
 
 </form>
