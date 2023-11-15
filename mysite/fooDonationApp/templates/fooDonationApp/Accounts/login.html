@@ -3,6 +3,10 @@
 
 {% block content %}
 
+{% if error %}
+<p style="color: brown;">{{error}}</p>
+{%endif%}
+
 {%if not request.user.is_authenticated %}
 <form action="" method="POST">  {% csrf_token %}
 <input type="text" name="username" style="margin-bottom: 5px;margin-top: 10px" placeholder="Username">

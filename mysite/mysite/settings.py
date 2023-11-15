@@ -71,7 +71,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "mysite.wsgi.application"
-
+LOGIN_URL = "/login"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

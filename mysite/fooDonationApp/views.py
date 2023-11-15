@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from .models import Donate, ReceiverUser
 
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 def home(request):
@@ -11,6 +13,7 @@ def About(request):
     return render(request, "fooDonationApp\About.html")
 
 
+@login_required
 def donate(request):
     # post request --->
     if request.method == "POST":
