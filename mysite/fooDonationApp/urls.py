@@ -15,10 +15,10 @@ urlpatterns = [
     path("About/", About),
     path("donate/", donate),
     path("home/", home),
+    path("history/", history),
     path("meals/", meals),
     path("meals/<int:id>", meals_detail),
     path("request_meal/<int:id>", request_meal),
     path("Receive/", Receive),
     path("search/", search),
-    path("history/", history),
 ]

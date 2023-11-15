@@ -1,0 +1,18 @@
+{% extends 'fooDonationApp\base.html' %}
+
+
+{% block content %}
+
+{%if not request.user.is_authenticated %}
+<form action="" method="POST">  {% csrf_token %}
+<input type="text" name="username" style="margin-bottom: 5px;margin-top: 10px" placeholder="Username">
+<br/>
+<input type="password" name="password" style="margin-bottom: 5px;" placeholder="Password">
+<br/>
+<button type="submit">login</button>
+</form>
+{%else%}
+<p>You are already login . Want to <a href="/logout">logout</a> ? </p>
+
+{%endif%}
+{% endblock content%}
