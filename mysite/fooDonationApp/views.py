@@ -89,13 +89,11 @@ def search(request):
 
     item_obj = None
     if query is not None:
-        item_obj1 = Donate.objects.all().filter(id=query)
-        item_obj2 = Donate.objects.get(id=query)
-        print(f"item_obj1 :{item_obj1}, item_obj2: {item_obj2}")
-    else:
-        item_obj1 = {}
-    context = {"object": item_obj2}
+        item_obj = Donate.objects.get(id=query)
 
+    else:
+        item_obj = {}
+    context = {"object": item_obj}
     return render(request, "fooDonationApp\search.html", context)
 
 

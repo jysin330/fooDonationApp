@@ -4,10 +4,11 @@
 
 {% block content %}
     
-<!-- {% if object%} -->
+{% if object%}
 <h1>{{object.foodItem}}</h1>
 <h1>{{object.id}}</h1>
-
-<!-- {%endif%} -->
+{%else%}
+<p>result not found</p>
+{%endif%}
 
 {% endblock content %}
