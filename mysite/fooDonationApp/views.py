@@ -81,7 +81,22 @@ def Receive(request):
 
 
 def search(request):
-    return render(request, "fooDonationApp\search.html")
+    # converting query into integer either none
+    try:
+        query = int(request.GET.get("query"))
+    except:
+        query = None
+
+    item_obj = None
+    if query is not None:
+        item_obj1 = Donate.objects.all().filter(id=query)
+        item_obj2 = Donate.objects.get(id=query)
+        print(f"item_obj1 :{item_obj1}, item_obj2: {item_obj2}")
+    else:
+        item_obj1 = {}
+    context = {"object": item_obj2}
+
+    return render(request, "fooDonationApp\search.html", context)
 
 
 def history(request):
