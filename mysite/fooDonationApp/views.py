@@ -16,17 +16,17 @@ def About(request):
 @login_required
 def donate(request):
     # post request --->
-    form = DonateForm()
+    form = DonateForm(request.POST or None)
     context = {"form": form}
-    if request.method == "POST":
-        donarName = request.POST.get("fname")
-        category = request.POST.get("Category")
-        donarEmail = request.POST.get("email")
-        donarPhone = request.POST.get("phoneNum")
-        foodItem = request.POST.get("FoodName")
-        des = request.POST.get("description")
-        donarAddress = request.POST.get("address")
-        foodImage = request.POST.get("foodImage")
+    if form.is_valid():
+        donarName = form.cleaned_data.get("fname")
+        category = form.cleaned_data.get("Category")
+        donarEmail = form.cleaned_data.get("email")
+        donarPhone = form.cleaned_data.get("phoneNum")
+        foodItem = form.cleaned_data.get("FoodName")
+        des = form.cleaned_data.get("description")
+        donarAddress = form.cleaned_data.get("address")
+        foodImage = form.cleaned_data.get("foodImage")
         # print(donarEmail, donarName, donarPhone, foodItem)
 
         Donate.objects.create(
