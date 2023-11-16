@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Donate, ReceiverUser
-
+from .form import DonateForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -16,6 +16,8 @@ def About(request):
 @login_required
 def donate(request):
     # post request --->
+    form = DonateForm()
+    context = {"form": form}
     if request.method == "POST":
         donarName = request.POST.get("fname")
         category = request.POST.get("Category")
@@ -37,7 +39,7 @@ def donate(request):
             address=donarAddress,
             image=foodImage,
         )
-    return render(request, "fooDonationApp\donate.html")
+    return render(request, "fooDonationApp\donate.html", context)
 
 
 def meals(request):
