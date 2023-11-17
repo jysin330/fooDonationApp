@@ -15,30 +15,33 @@ def About(request):
 
 @login_required
 def donate(request):
-    # post request --->
-    form = DonateForm(request.POST or None)
+    form = DonateForm()
     context = {"form": form}
-    if form.is_valid():
-        donarName = form.cleaned_data.get("fname")
-        category = form.cleaned_data.get("Category")
-        donarEmail = form.cleaned_data.get("email")
-        donarPhone = form.cleaned_data.get("phoneNum")
-        foodItem = form.cleaned_data.get("FoodName")
-        des = form.cleaned_data.get("description")
-        donarAddress = form.cleaned_data.get("address")
-        foodImage = form.cleaned_data.get("foodImage")
-        # print(donarEmail, donarName, donarPhone, foodItem)
+    # post request --->
+    if request.method == "POST":
+        form = DonateForm(request.POST or None)
+        if form.is_valid():
+            donarName = form.cleaned_data.get("donarName")
+            category = form.cleaned_data.get("category")
+            donarEmail = form.cleaned_data.get("donarEmail")
+            phoneNum = form.cleaned_data.get("phoneNum")
+            foodItem = form.cleaned_data.get("foodItem")
+            fooDescription = form.cleaned_data.get("fooDescription")
+            address = form.cleaned_data.get("address")
 
-        Donate.objects.create(
-            category=category,
-            donarName=donarName,
-            donarEmail=donarEmail,
-            phoneNum=donarPhone,
-            foodItem=foodItem,
-            fooDescription=des,
-            address=donarAddress,
-            image=foodImage,
-        )
+            # print(donarEmail, donarName, donarPhone, foodItem)
+
+            donate_object = Donate.objects.create(
+                category=category,
+                donarName=donarName,
+                donarEmail=donarEmail,
+                phoneNum=phoneNum,
+                foodItem=foodItem,
+                fooDescription=fooDescription,
+                address=address,
+            )
+            context["object"] = donate_object
+            context["created"] = True
     return render(request, "fooDonationApp\donate.html", context)
 
 

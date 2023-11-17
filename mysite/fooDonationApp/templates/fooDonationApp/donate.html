@@ -2,6 +2,8 @@
 
 {% block content %}
 
+{% if not created%}
+
 <form action="." method="post" id="category"> {% csrf_token %}
    
   
@@ -11,6 +13,10 @@
 
 
 </div>
+{%else%}
+<p>Meal Saved</p>
+<h1>{{object.foodItem}}</h1>
+{%endif%}
 {% endblock %}
 
 

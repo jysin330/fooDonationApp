@@ -13,7 +13,6 @@ class DonateForm(forms.ModelForm):
             "foodItem",
             "fooDescription",
             "address",
-            "image",
         ]
 
     def clean(self):
