@@ -4,8 +4,14 @@ from django.db import IntegrityError
 
 # Create your models here.
 class Donate(models.Model):
+    CATEGORY = (
+        ("1", "Raw Food"),
+        ("2", "Packed Food"),
+        ("3", "Cooked Food"),
+    )
     donar_id = models.AutoField
-    category = models.CharField(max_length=140, null=True)
+
+    category = models.CharField(max_length=30, choices=CATEGORY, default="1")
     donarName = models.CharField(max_length=20)
     donarEmail = models.EmailField(max_length=70, default="")
     phoneNum = models.CharField(max_length=70, default="")
