@@ -15,33 +15,13 @@ def About(request):
 
 @login_required
 def donate(request):
-    form = DonateForm()
+    form = DonateForm(request.POST or None)
     context = {"form": form}
-    # post request --->
-    if request.method == "POST":
-        form = DonateForm(request.POST or None)
-        if form.is_valid():
-            donarName = form.cleaned_data.get("donarName")
-            category = form.cleaned_data.get("category")
-            donarEmail = form.cleaned_data.get("donarEmail")
-            phoneNum = form.cleaned_data.get("phoneNum")
-            foodItem = form.cleaned_data.get("foodItem")
-            fooDescription = form.cleaned_data.get("fooDescription")
-            address = form.cleaned_data.get("address")
-
-            # print(donarEmail, donarName, donarPhone, foodItem)
-
-            donate_object = Donate.objects.create(
-                category=category,
-                donarName=donarName,
-                donarEmail=donarEmail,
-                phoneNum=phoneNum,
-                foodItem=foodItem,
-                fooDescription=fooDescription,
-                address=address,
-            )
-            context["object"] = donate_object
-            context["created"] = True
+    if form.is_valid():
+        donate_object = form.save()
+        context["form"] = DonateForm()
+        context["object"] = donate_object
+        context["created"] = True
     return render(request, "fooDonationApp\donate.html", context)
 
 
@@ -107,3 +87,36 @@ def search(request):
 
 def history(request):
     return render(request, "fooDonationApp\history.html")
+
+
+#  oldd----->
+# @login_required
+# def donate(request):
+#     form = DonateForm()
+#     context = {"form": form}
+#     # post request --->
+#     if request.method == "POST":
+#         form = DonateForm(request.POST or None)
+#         if form.is_valid():
+#             donarName = form.cleaned_data.get("donarName")
+#             category = form.cleaned_data.get("category")
+#             donarEmail = form.cleaned_data.get("donarEmail")
+#             phoneNum = form.cleaned_data.get("phoneNum")
+#             foodItem = form.cleaned_data.get("foodItem")
+#             fooDescription = form.cleaned_data.get("fooDescription")
+#             address = form.cleaned_data.get("address")
+
+#             # print(donarEmail, donarName, donarPhone, foodItem)
+
+#             donate_object = Donate.objects.create(
+#                 category=category,
+#                 donarName=donarName,
+#                 donarEmail=donarEmail,
+#                 phoneNum=phoneNum,
+#                 foodItem=foodItem,
+#                 fooDescription=fooDescription,
+#                 address=address,
+#             )
+#             context["object"] = donate_object
+#             context["created"] = True
+#     return render(request, "fooDonationApp\donate.html", context)
