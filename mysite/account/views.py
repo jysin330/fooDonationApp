@@ -7,18 +7,19 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 # creating login view-->
 def login_view(request):
     if request.method == "POST":
-        username = request.POST.get("username")
-        password = request.POST.get("password")
-        user = authenticate(request, username=username, password=password)
+        form = AuthenticationForm(request, data=request.POST)
 
-        if user is None:
-            context = {"error": "Invalid username and password"}
-            return render(request, "fooDonationApp\Accounts\login.html", context)
+        if form.is_valid():
+            user = form.get_user()
 
-        login(request, user)
-        return redirect("/home")
+            login(request, user)
+            return redirect("/home")
 
-    return render(request, "fooDonationApp\Accounts\login.html")
+    else:
+        form = AuthenticationForm(request)
+
+    context = {"form": form}
+    return render(request, "fooDonationApp\Accounts\login.html", context)
 
 
 #  creating logout view
