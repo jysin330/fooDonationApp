@@ -1,5 +1,5 @@
 from django import forms
-from .models import Donate
+from .models import Donate, ReceiverUser
 
 
 class DonateForm(forms.ModelForm):
@@ -17,7 +17,24 @@ class DonateForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = self.cleaned_data  # dictonary
-        print(cleaned_data)
+
+        return cleaned_data
+
+
+class ReceiverForm(forms.ModelForm):
+    class Meta:
+        model = ReceiverUser
+        fields = [
+            "receiver_meal",
+            "receiver_name",
+            "receiver_num",
+            "receiver_email",
+            "receiver_address",
+            "des",
+        ]
+
+    def clean(self):
+        cleaned_data = self.cleaned_data
         return cleaned_data
 
 

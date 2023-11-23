@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Donate, ReceiverUser
-from .form import DonateForm
+from .form import DonateForm, ReceiverForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -28,7 +28,7 @@ def donate(request):
 def meals(request):
     meal_object = Donate.objects.all()
     # meal_query = meal_object
-    print(meal_object)
+
     obj = {"object": meal_object}
     return render(request, "fooDonationApp\meals.html", obj)
 
@@ -59,9 +59,9 @@ def request_meal(request, id):
             des=des,
         )
         b.save()
-    obj = {"object": meal_object, "created": True}
+    context = {"object": meal_object, "created": True}
 
-    return render(request, "fooDonationApp\details\Request_form.html", obj)
+    return render(request, "fooDonationApp\details\Request_form.html", context)
 
 
 def Receive(request):
