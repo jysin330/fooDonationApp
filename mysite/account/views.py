@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 
 # Create your views here.
+# creating login view-->
 def login_view(request):
     if request.method == "POST":
         username = request.POST.get("username")
@@ -20,6 +21,7 @@ def login_view(request):
     return render(request, "fooDonationApp\Accounts\login.html")
 
 
+#  creating logout view
 def logout_view(request):
     if request.method == "POST":
         logout(request)
@@ -28,6 +30,7 @@ def logout_view(request):
     return render(request, "fooDonationApp\Accounts\logout.html", {})
 
 
+# creating register view
 def register_view(request):
     form = UserCreationForm(request.POST or None)
     context = {"form": form}
@@ -37,3 +40,19 @@ def register_view(request):
         return redirect("/login")
 
     return render(request, "fooDonationApp\Accounts\Register.html", context)
+
+
+# def login_view(request):
+#     if request.method == "POST":
+#         username = request.POST.get("username")
+#         password = request.POST.get("password")
+#         user = authenticate(request, username=username, password=password)
+
+#         if user is None:
+#             context = {"error": "Invalid username and password"}
+#             return render(request, "fooDonationApp\Accounts\login.html", context)
+
+#         login(request, user)
+#         return redirect("/home")
+
+#     return render(request, "fooDonationApp\Accounts\login.html")
