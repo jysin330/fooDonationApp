@@ -11,7 +11,7 @@ class Donate(models.Model):
     )
     donar_id = models.AutoField
 
-    category = models.CharField(max_length=30, choices=CATEGORY, default="1")
+    category = models.CharField(max_length=30, choices=CATEGORY, default="Raw Food")
     donarName = models.CharField(max_length=20, default="")
     donarEmail = models.EmailField(max_length=70, default="")
     phoneNum = models.CharField(max_length=70, default="")
@@ -24,8 +24,16 @@ class Donate(models.Model):
 
 
 class ReceiverUser(models.Model):
+    object_meal = Donate.objects.all()
+
+    meal = ()
+    temp = list(meal)
+    for x in object_meal:
+        if x.foodItem:
+            temp.append((f"{x.foodItem}", f"{x.foodItem}"))
+    meal = tuple(temp)
     receiver_id = models.AutoField
-    receiver_meal = models.CharField(max_length=30, null=True)
+    receiver_meal = models.CharField(max_length=30, choices=meal, default="")
     receiver_name = models.CharField(max_length=30)
     receiver_num = models.CharField(max_length=10, default="")
     receiver_email = models.CharField(max_length=50, default="")
