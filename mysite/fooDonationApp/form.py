@@ -21,7 +21,7 @@ class DonateForm(forms.ModelForm):
         return cleaned_data
 
 
-class ReceiverForm(forms.ModelForm):
+class ReceiveForm(forms.ModelForm):
     class Meta:
         model = ReceiverUser
         fields = [

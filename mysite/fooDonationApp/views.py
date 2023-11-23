@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Donate, ReceiverUser
-from .form import DonateForm, ReceiverForm
+from .form import DonateForm, ReceiveForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -41,25 +41,14 @@ def meals_detail(request, id):
     return render(request, "fooDonationApp\details\meal_detail.html", obj)
 
 
-def request_meal(request, id):
-    meal_object = Donate.objects.all().filter(id=id)
-    if request.method == "POST":
-        receiver_meal = request.POST.get("foodItemName")
-        receiver_name = request.POST.get("receiverName")
-        receiver_email = request.POST.get("receiverEmail")
-        receiver_num = request.POST.get("receiverNumber")
-        receiver_address = request.POST.get("receiverAddress")
-        des = request.POST.get("receivertext")
-        b = ReceiverUser(
-            receiver_meal=receiver_meal,
-            receiver_name=receiver_name,
-            receiver_email=receiver_email,
-            receiver_num=receiver_num,
-            receiver_address=receiver_address,
-            des=des,
-        )
-        b.save()
-    context = {"object": meal_object, "created": True}
+def request_meal(request):
+    form = ReceiveForm(request.POST or None)
+    context = {"form": form}
+    if form.is_valid():
+        receive_object = form.save()
+        context["form"] = ReceiveForm()
+        context["object"] = receive_object
+        context["created"] = True
 
     return render(request, "fooDonationApp\details\Request_form.html", context)
 
@@ -120,3 +109,28 @@ def history(request):
 #             context["object"] = donate_object
 #             context["created"] = True
 #     return render(request, "fooDonationApp\donate.html", context)
+
+# def request_meal(request):
+
+# meal_object = Donate.objects.all().filter(id=id)
+# if request.method == "POST":
+#     receiver_meal = request.POST.get("foodItemName")
+#     receiver_name = request.POST.get("receiverName")
+#     receiver_email = request.POST.get("receiverEmail")
+#     receiver_num = request.POST.get("receiverNumber")
+#     receiver_address = request.POST.get("receiverAddress")
+#     des = request.POST.get("receivertext")
+#     b = ReceiverUser(
+#         receiver_meal=receiver_meal,
+#         receiver_name=receiver_name,
+#         receiver_email=receiver_email,
+#         receiver_num=receiver_num,
+#         receiver_address=receiver_address,
+#         des=des,
+#     )
+#     b.save()
+# context["object"] = meal_object
+# context["created"] = True
+# context = {"object": meal_object, "created": True}
+
+# return render(request, "fooDonationApp\details\Request_form.html", context)

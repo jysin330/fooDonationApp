@@ -18,7 +18,7 @@ urlpatterns = [
     path("history/", history),
     path("meals/", meals),
     path("meals/<int:id>", meals_detail),
-    path("request_meal/<int:id>", request_meal),
+    path("request_meal/", request_meal),
     path("Receive/", Receive),
     path("search/", search),
 ]

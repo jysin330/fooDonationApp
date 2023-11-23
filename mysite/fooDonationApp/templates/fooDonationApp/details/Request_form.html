@@ -1,3 +1,5 @@
+
+
 {% extends 'fooDonationApp\base.html' %}
 
 
@@ -5,22 +7,33 @@
 {% block content %}
 
 <h1>Welcome to request for Meal</h1>
-
-
-{% for x in object%}
-<div style="margin-top: 20px;">
-    <select name="foodItemName" id="Meal" form="requestForm" style="font-weight:500; font-size: 15px; border:solid 2px black; padding:4px; margin-bottom: 4px">
-        <option value="{{x.foodItem}}" name >{{x.foodItem}}</option>
-     
+<form action="/request_meal/" method="post" id="requestForm"> {% csrf_token %}
         
-    </select>
+ {{form.as_p}}
+ <button type="submit">Submit Request</button>
+
+
+</form> 
+{% endblock content%}
 
 
 
-<form action="/request_meal/{{x.id}}" method="post" id="requestForm"> {% csrf_token %}
 
-{{object.id}}
-<input type="text" style="margin-bottom: 10px; padding: 5px;"  placeholder="Receiver Name" name="receiverName" id="receiverName">
+<!-- {% for x in object%} -->
+<!-- <div style="margin-top: 20px;">
+   <select name="foodItemName" id="Meal" form="requestForm" style="font-weight:500; font-size: 15px; border:solid 2px black; padding:4px; margin-bottom: 4px">
+       <option value="{{x.foodItem}}" name >{{x.foodItem}}</option>
+    
+       
+   </select>
+   
+    -->
+   
+   <!-- <form action="/request_meal/{{x.id}}" method="post" id="requestForm"> {% csrf_token %} -->
+       
+       
+       <!-- {{object.id}} -->
+       <!-- <input type="text" style="margin-bottom: 10px; padding: 5px;"  placeholder="Receiver Name" name="receiverName" id="receiverName">
 <br/>
 <input type="email" style="margin-bottom: 10px; padding: 5px;" placeholder="Receiver Email" name="receiverEmail" id="receiverEmail">
 <br/>
@@ -30,13 +43,11 @@
 <br/>
 
 <textarea style="margin-bottom: 10px; padding: 5px; height: 50px" name="receivertext" placeholder="Verify yourself how you will use food?"></textarea>
-<br/>
-{{form}}
-<button type="submit">Submit Request</button>
+<br/> -->
+
+<!-- <button type="submit">Submit Request</button>
 
 
-</form> 
+</form>  -->
 
-{%endfor %}
-
-{% endblock content%}
+<!-- {%endfor %} -->
