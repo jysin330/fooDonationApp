@@ -21,7 +21,8 @@ print(BASE_DIR)
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-SECRET_KEY =os.environ.get("SECRET_KEY" ,"django-insecure-+t8xz*w-0&d!m5w*xr9t-gp8o8o)-3$acdt)m&@$g+osoe2mlk")
+# SECRET_KEY =os.environ.get("SECRET_KEY" ,"django-insecure-+t8xz*w-0&d!m5w*xr9t-gp8o8o)-3$acdt)m&@$g+osoe2mlk")
+SECRET_KEY =os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = str(os.environ.get('DEBUG')) == '1' #True
