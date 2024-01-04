@@ -7,7 +7,11 @@ class fooDonationAppConfigTest(TestCase):
         SECRET_KEY =os.environ.get("SECRET_KEY")
         # self.assertNotEqual(SECRET_KEY, "abc123")
         try:
-            strong_key = validate_password(SECRET_KEY)
+            is_strong = validate_password(SECRET_KEY)
         except Exception as e:
             msg = f"Weak Password - {e}"
             self.fail(msg)
+
+
+
+# There is a philosopy called test driven development which is tdd 
