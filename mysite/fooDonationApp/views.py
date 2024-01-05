@@ -32,7 +32,7 @@ def meals(request):
     obj = {"object": meal_object}
     return render(request, "fooDonationApp\meals.html", obj)
 
-#  The overall Donated Food BY Doner User
+#  The overall Donated Food BY Donar User
 def meals_detail(request, id):
     meal_object = Donate.objects.all().filter(id=id)
     # meal_query = meal_object
@@ -52,6 +52,14 @@ def request_meal(request):
 
     return render(request, "fooDonationApp\details\Request_form.html", context)
 
+def rawFood(request):
+    return render(request, "fooDonationApp\details\RawFooDetail.html")
+
+def cookedFood(request):
+    return render(request,  "fooDonationApp\details\cookedFooDetail.html")
+
+def packedFood(request):
+    return render(request,  "fooDonationApp\details\packedFooDetail.html")
 
 def Receive(request):
     return render(request, "fooDonationApp\Receive.html")
