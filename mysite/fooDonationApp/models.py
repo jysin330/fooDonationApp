@@ -32,6 +32,12 @@ class ReceiverUser(models.Model):
         if x.foodItem:
             temp.append((f"{x.foodItem}", f"{x.foodItem}"))
     meal = tuple(temp)
+    CATEGORY = (
+        ("Raw Food", "Raw Food"),
+        ("Packed Food", "Packed Food"),
+        ("Cooked Food", "Cooked Food"),
+    )
+    category = models.CharField(max_length=30, choices=CATEGORY, default="Raw Food")
     receiver_id = models.AutoField
     receiver_meal = models.CharField(max_length=30, choices=meal, default="")
     receiver_name = models.CharField(max_length=30)
@@ -39,3 +45,5 @@ class ReceiverUser(models.Model):
     receiver_email = models.CharField(max_length=50, default="")
     receiver_address = models.CharField(max_length=70)
     des = models.TextField()
+
+

@@ -2,6 +2,7 @@ from django import forms
 from .models import Donate, ReceiverUser
 
 
+#  DonateForm class form created using Donate model
 class DonateForm(forms.ModelForm):
     class Meta:
         model = Donate
@@ -20,11 +21,12 @@ class DonateForm(forms.ModelForm):
 
         return cleaned_data
 
-
+#  ReciverForm class form created using ReceiverUser Model 
 class ReceiveForm(forms.ModelForm):
     class Meta:
         model = ReceiverUser
         fields = [
+            "category",
             "receiver_meal",
             "receiver_name",
             "receiver_num",
