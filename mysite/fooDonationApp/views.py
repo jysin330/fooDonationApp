@@ -30,6 +30,7 @@ def meals(request):
     # meal_query = meal_object
 
     obj = {"object": meal_object}
+    obj["list"] = ["Raw Food", "Packed Food", "Cooked Food"]
     return render(request, "fooDonationApp\meals.html", obj)
 
 #  The overall Donated Food BY Donar User

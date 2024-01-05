@@ -2,8 +2,45 @@
 
 
 {% block content %}
-{% for x in object%}
-<h1><a href="/meals/{{x.id}}">{{x.foodItem}}</a></h1>
 
+{% for x in list %}
+    <h1><a href='/{{x.replace(" ","")}}'>{{x}}</a></h1>
+    {% for y in object %}
+    {% if y.category == x %}
+    
+    <h3><a href="/meals/{{y.id}}">{{y.foodItem}}</a></h3>
+    {% endif %}
+     
+    {%endfor%}
 {%endfor%}
 {% endblock %}
+
+
+
+
+<!-- <h1>Raw Food</h1>
+{% for x in object %}
+{% if x.category == "Raw Food"%}
+<h1><a href="/meals/{{x.id}}">{{x.foodItem}}</a></h1>
+{% endif %}
+{%endfor%}
+
+<h1>Packed Food</h1>
+{% for x in object %}
+{% if x.category == "Packed Food"%}
+<h1><a href="/meals/{{x.id}}">{{x.foodItem}}</a></h1>
+{% endif %}
+{%endfor%}
+
+<h1>Cooked Food</h1>
+{% for x in object %}
+{% if x.category == "Cooked Food"%}
+<h1><a href="/meals/{{x.id}}">{{x.foodItem}}</a></h1>
+{% endif %}
+{%endfor%} -->
+
+<!-- {% for x in object%}
+<h1><a href="/meals/{{x.id}}">{{x.foodItem}}</a></h1>
+    
+{%endfor%}
+     -->
