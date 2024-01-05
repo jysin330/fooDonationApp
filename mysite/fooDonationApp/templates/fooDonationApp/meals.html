@@ -4,9 +4,9 @@
 {% block content %}
 
 {% for x in list %}
-    <h1><a href='/{{x.replace(" ","")}}'>{{x}}</a></h1>
+    <h1><a href="/{{x.1}}">{{x.0}}</a></h1>
     {% for y in object %}
-    {% if y.category == x %}
+    {% if y.category == x.0 %}
     
     <h3><a href="/meals/{{y.id}}">{{y.foodItem}}</a></h3>
     {% endif %}

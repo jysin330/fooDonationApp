@@ -16,15 +16,15 @@ from .views import (
 
 urlpatterns = [
     path("About/", About),
-    path("CookedFood/", cookedFood),
+    path("cookedFood/", cookedFood),
     path("donate/", donate),
     path("home/", home),
     path("history/", history),
     path("meals/", meals),
     path("meals/<int:id>", meals_detail),
-    path("PackedFood/", packedFood),
+    path("packedFood/", packedFood),
     path("request_meal/", request_meal),
     path("Receive/", Receive),
-    path("RawFood/", rawFood),
+    path("rawFood/", rawFood),
     path("search/", search),
 ]
