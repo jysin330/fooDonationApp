@@ -69,7 +69,11 @@ def cookedFood(request):
     return render(request,  "fooDonationApp\details\cookedFooDetail.html", context)
 
 def packedFood(request):
-    return render(request,  "fooDonationApp\details\packedFooDetail.html")
+    meal_object = Donate.objects.filter(category = "Packed Food")
+    context ={
+        "object": meals_detail
+    }
+    return render(request,  "fooDonationApp\details\packedFooDetail.html",context)
 
 def Receive(request):
     return render(request, "fooDonationApp\Receive.html")
