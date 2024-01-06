@@ -82,7 +82,11 @@ def packedFood(request):
     return render(request,  "fooDonationApp\details\packedFooDetail.html",context)
 
 def Receive(request):
-    return render(request, "fooDonationApp\Receive.html")
+    receiver_object = ReceiverUser.objects.all()
+    context = {
+        "object": receiver_object
+    }
+    return render(request, "fooDonationApp\Receive.html", context)
 
 
 

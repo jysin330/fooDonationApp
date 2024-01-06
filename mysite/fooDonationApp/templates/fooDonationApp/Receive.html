@@ -2,5 +2,7 @@
 
 
 {% block content %}
-<h1>This is receive page</h1>
+{%for x in object%}
+<h3><a href="">{{x.receiver_meal}} </a> is requested by {{x.receiver_name}}</h3>
+{%endfor%}
 {% endblock %}
