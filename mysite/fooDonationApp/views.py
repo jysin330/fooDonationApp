@@ -8,11 +8,11 @@ from django.contrib.auth.decorators import login_required
 def home(request):
     return render(request, "fooDonationApp\home.html")
 
-
+#  rendering  to About Page 
 def About(request):
     return render(request, "fooDonationApp\About.html")
 
-
+# Creating DOnate form by djnago built in form class
 @login_required
 def donate(request):
     form = DonateForm(request.POST or None)
@@ -24,7 +24,7 @@ def donate(request):
         context["created"] = True
     return render(request, "fooDonationApp\donate.html", context)
 
-
+#  gathering all the donated food on the meal page
 def meals(request):
     meal_object = Donate.objects.all()
     # meal_query = meal_object
@@ -34,7 +34,7 @@ def meals(request):
     obj["list"] = [["Raw Food","rawFood"],["Packed Food","packedFood"], ["Cooked Food","cookedFood"]]
     return render(request, "fooDonationApp\meals.html", obj)
 
-#  The overall Donated Food BY Donar User
+#  Detail of the meal by Id and rendering to meal_detail page
 def meals_detail(request, id):
     meal_object = Donate.objects.all().filter(id=id)
     # meal_query = meal_object
@@ -54,12 +54,16 @@ def request_meal(request):
 
     return render(request, "fooDonationApp\details\Request_form.html", context)
 
+
+# Data collected for the Raw Food Detail
 def rawFood(request):
     meal_object = Donate.objects.filter(category = 'Raw Food')
     context ={
         "object" : meal_object
     }
     return render(request, "fooDonationApp\details\RawFooDetail.html", context= context)
+
+# Data collected for the Cooked Food Detail
 
 def cookedFood(request):
     meal_object = Donate.objects.filter(category = "Cooked Food")
@@ -68,6 +72,8 @@ def cookedFood(request):
     }
     return render(request,  "fooDonationApp\details\cookedFooDetail.html", context)
 
+
+# # Data collected for the Packed Food Detail
 def packedFood(request):
     meal_object = Donate.objects.filter(category = "Packed Food")
     context ={
@@ -79,6 +85,8 @@ def Receive(request):
     return render(request, "fooDonationApp\Receive.html")
 
 
+
+# This will take the query from the search bar And Filtering the data according to the query
 def search(request):
     # converting query into integer either none
     try:
