@@ -30,8 +30,8 @@ def meals(request):
     # meal_query = meal_object
 
     obj = {"object": meal_object}
-    
-    obj["list"] = [["Raw Food","rawFood"], ["Packed Food","packedFood"], ["Cooked Food","cookedFood"]]
+
+    obj["list"] = [["Raw Food","rawFood"],["Packed Food","packedFood"], ["Cooked Food","cookedFood"]]
     return render(request, "fooDonationApp\meals.html", obj)
 
 #  The overall Donated Food BY Donar User
@@ -55,7 +55,11 @@ def request_meal(request):
     return render(request, "fooDonationApp\details\Request_form.html", context)
 
 def rawFood(request):
-    return render(request, "fooDonationApp\details\RawFooDetail.html")
+    meal_object = Donate.objects.filter(category = 'Raw Food')
+    context ={
+        "object" : meal_object
+    }
+    return render(request, "fooDonationApp\details\RawFooDetail.html", context= context)
 
 def cookedFood(request):
     return render(request,  "fooDonationApp\details\cookedFooDetail.html")
