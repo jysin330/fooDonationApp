@@ -1,14 +1,14 @@
 from django.db import models
 from django.db import IntegrityError
 
-
-# Create your models here.
-class Donate(models.Model):
-    CATEGORY = (
+CATEGORY = (
         ("Raw Food", "Raw Food"),
         ("Packed Food", "Packed Food"),
         ("Cooked Food", "Cooked Food"),
     )
+# Create your models here.
+class Donate(models.Model):
+  
     donar_id = models.AutoField
 
     category = models.CharField(max_length=30, choices=CATEGORY, default="Raw Food")
@@ -32,11 +32,7 @@ class ReceiverUser(models.Model):
         if x.foodItem:
             temp.append((f"{x.foodItem}", f"{x.foodItem}"))
     meal = tuple(temp)
-    CATEGORY = (
-        ("Raw Food", "Raw Food"),
-        ("Packed Food", "Packed Food"),
-        ("Cooked Food", "Cooked Food"),
-    )
+   
     category = models.CharField(max_length=30, choices=CATEGORY, default="Raw Food")
     receiver_id = models.AutoField
     receiver_meal = models.CharField(max_length=30, choices=meal, default="")
