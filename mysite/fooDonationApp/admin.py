@@ -7,7 +7,7 @@ class DonateAdmin(admin.ModelAdmin):
     search_fields= ['id']
 
 class ReceiverUserAdmin(admin.ModelAdmin):
-    list_display= ['id',"receiver_meal","receiver_name","receiver_email"]
+    list_display= ['id',"receiver_meal","receiver_name","receiver_email", "timestamp","update"]
     search_fields= ['id']
 
 admin.site.register(Donate, DonateAdmin)

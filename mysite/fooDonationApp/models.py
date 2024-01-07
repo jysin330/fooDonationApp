@@ -45,5 +45,6 @@ class ReceiverUser(models.Model):
     receiver_email = models.CharField(max_length=50, default="")
     receiver_address = models.CharField(max_length=70)
     des = models.TextField()
-
+    timestamp = models.DateTimeField(auto_now_add =True)
+    update = models.DateTimeField(auto_now =True)
 
