@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Donate, ReceiverUser
+from .models import DonarUser, ReceiverUser
 from .form import DonateForm, ReceiveForm
 from django.contrib.auth.decorators import login_required
 
@@ -26,7 +26,7 @@ def donate(request):
 
 #  gathering all the donated food on the meal page
 def meals(request):
-    meal_object = Donate.objects.all()
+    meal_object = DonarUser.objects.all()
     # meal_query = meal_object
 
     obj = {"object": meal_object}
@@ -36,7 +36,7 @@ def meals(request):
 
 #  Detail of the meal by Id and rendering to meal_detail page
 def meals_detail(request, id):
-    meal_object = Donate.objects.all().filter(id=id)
+    meal_object = DonarUser.objects.all().filter(id=id)
     # meal_query = meal_object
     # print(meal_object)
     obj = {"object": meal_object}
@@ -57,7 +57,7 @@ def request_meal(request):
 
 # Data collected for the Raw Food Detail
 def rawFood(request):
-    meal_object = Donate.objects.filter(category = 'Raw Food')
+    meal_object = DonarUser.objects.filter(category = 'Raw Food')
     context ={
         "object" : meal_object
     }
@@ -66,7 +66,7 @@ def rawFood(request):
 # Data collected for the Cooked Food Detail
 
 def cookedFood(request):
-    meal_object = Donate.objects.filter(category = "Cooked Food")
+    meal_object = DonarUser.objects.filter(category = "Cooked Food")
     context= {
         "object": meal_object
     }
@@ -75,7 +75,7 @@ def cookedFood(request):
 
 # # Data collected for the Packed Food Detail
 def packedFood(request):
-    meal_object = Donate.objects.filter(category = "Packed Food")
+    meal_object = DonarUser.objects.filter(category = "Packed Food")
     context ={
         "object": meals_detail
     }
@@ -100,7 +100,7 @@ def search(request):
 
     item_obj = None
     if query is not None:
-        item_obj = Donate.objects.get(id=query)
+        item_obj = DonarUser.objects.get(id=query)
 
     else:
         item_obj = {}

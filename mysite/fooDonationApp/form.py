@@ -1,11 +1,11 @@
 from django import forms
-from .models import Donate, ReceiverUser
+from .models import DonarUser, ReceiverUser
 
 
 #  DonateForm class form created using Donate model
 class DonateForm(forms.ModelForm):
     class Meta:
-        model = Donate
+        model = DonarUser
         fields = [
             "category",
             "donarName",
