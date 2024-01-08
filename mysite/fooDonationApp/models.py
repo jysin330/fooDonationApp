@@ -16,6 +16,7 @@ class Donate(models.Model):
     donarEmail = models.EmailField(max_length=70, default="")
     phoneNum = models.CharField(max_length=70, default="")
     foodItem = models.CharField(max_length=50, default="")
+    slug= models.SlugField(null =True, blank = True)
     fooDescription = models.CharField(max_length=400, default="")
     address = models.CharField(max_length=100, default="")
     timestamp = models.DateTimeField(auto_now_add =True)
