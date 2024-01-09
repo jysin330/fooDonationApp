@@ -40,10 +40,16 @@ class Donate(models.Model):
         # do another something
 
 def slugify_instance_foodItem(instance, save=False):
-     slug = slugify(instance.foodItem)
-     instance.slug = slug
-     if save:
-          instance.save()
+    slug = slugify(instance.foodItem)
+    qs = Donate.objects.filter(slug=slug).exclude(id = instance.id)
+    if qs.exists():
+        slug = f"{slug}-{qs.count()+1}"
+    instance.slug = slug
+    if save:
+        instance.save()
+    return instance
+
+     
 
 #  instance is the actual instance of whatever the model that's being sent and sender is the actual model class itself which we can test out by doing sender and instance.
 def donate_pre_save(sender, instance, *args, **kwargs):
