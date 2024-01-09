@@ -1,6 +1,7 @@
 from django.db import models
 from django.db import IntegrityError
 from django.utils import timezone
+from django.utils.text import slugify
 CATEGORY = (
         ("Raw Food", "Raw Food"),
         ("Packed Food", "Packed Food"),
@@ -24,6 +25,14 @@ class Donate(models.Model):
     publish = models.DateField(auto_now_add = False, auto_now =False, default = timezone.now)
     def __str__(self):
         return self.foodItem
+
+    def save(self,*args, **kwargs):
+
+        if self.slug is None:
+            self.slug = slugify(self.foodItem)
+
+        super().save(*args, **kwargs)
+
 
 
 class ReceiverUser(models.Model):
