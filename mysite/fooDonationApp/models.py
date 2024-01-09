@@ -27,6 +27,8 @@ class Donate(models.Model):
     def __str__(self):
         return self.foodItem
 
+
+    # Where ever the save method is called these signals(pre_save and post_save) be called, including over-riding the save method is called.
     def save(self,*args, **kwargs):
 
         if self.slug is None:
@@ -34,7 +36,9 @@ class Donate(models.Model):
 
         super().save(*args, **kwargs)
 
-def donate_pre_save(*args, **kwargs):
+
+#  instance is the actual instance of whatever the model that's being sent and sender is the actual model model class itself which we can test out by doing sender and instance.
+def donate_pre_save(sender, instance, *args, **kwargs):
     print("pre_save")
     print(args,kwargs)
 
