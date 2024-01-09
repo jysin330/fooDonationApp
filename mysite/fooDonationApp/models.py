@@ -30,23 +30,30 @@ class Donate(models.Model):
 
     # Where ever the save method is called these signals(pre_save and post_save) be called, including over-riding the save method is called.
     def save(self,*args, **kwargs):
-
-        if self.slug is None:
-            self.slug = slugify(self.foodItem)
+        # obj = Donate.objects.get(id=1)
+        # set something
+        # if self.slug is None:
+        #     self.slug = slugify(self.foodItem)
 
         super().save(*args, **kwargs)
+        # obj.save()
+        # do another something
 
 
-#  instance is the actual instance of whatever the model that's being sent and sender is the actual model model class itself which we can test out by doing sender and instance.
+
+#  instance is the actual instance of whatever the model that's being sent and sender is the actual model class itself which we can test out by doing sender and instance.
 def donate_pre_save(sender, instance, *args, **kwargs):
     print("pre_save")
-    print(args,kwargs)
+    if instance.slug is None:
+            instance.slug = slugify(instance.foodItem)
 
 pre_save.connect(donate_pre_save, sender= Donate)
 
-def donate_post_save(*args, **kwargs):
+def donate_post_save(sender, instance, created,*args, **kwargs):
     print("post_save")
-    print(args,kwargs)
+    if created:
+         instance.slug = "This is the slug!!"
+         instance.save()
 
 post_save.connect(donate_post_save, sender= Donate)
 
