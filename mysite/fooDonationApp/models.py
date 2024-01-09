@@ -2,6 +2,7 @@ from django.db import models
 from django.db import IntegrityError
 from django.utils import timezone
 from django.utils.text import slugify
+from django.db.models.signals import pre_save, post_save
 CATEGORY = (
         ("Raw Food", "Raw Food"),
         ("Packed Food", "Packed Food"),
@@ -33,6 +34,17 @@ class Donate(models.Model):
 
         super().save(*args, **kwargs)
 
+def donate_pre_save(*args, **kwargs):
+    print("pre_save")
+    print(args,kwargs)
+
+pre_save.connect(donate_pre_save, sender= Donate)
+
+def donate_post_save(*args, **kwargs):
+    print("post_save")
+    print(args,kwargs)
+
+post_save.connect(donate_post_save, sender= Donate)
 
 
 class ReceiverUser(models.Model):
