@@ -1,5 +1,6 @@
 from django.db import models
 from django.db import IntegrityError
+import random
 from django.utils import timezone
 from django.utils.text import slugify
 from django.db.models.signals import pre_save, post_save
@@ -39,11 +40,16 @@ class Donate(models.Model):
         # obj.save()
         # do another something
 
-def slugify_instance_foodItem(instance, save=False):
-    slug = slugify(instance.foodItem)
+def slugify_instance_foodItem(instance, save=False,new_slug =None):
+    if new_slug is not None:
+        slug= new_slug
+    else:
+        slug = slugify(instance.foodItem)
     qs = Donate.objects.filter(slug=slug).exclude(id = instance.id)
     if qs.exists():
-        slug = f"{slug}-{qs.count()+1}"
+        rand_int = random.randint(300_000,500_000)
+        slug = f"{slug}-{rand_int}"
+        return slugify_instance_foodItem(instance, save=save, new_slug= slug)
     instance.slug = slug
     if save:
         instance.save()
