@@ -1,8 +1,6 @@
 from django.db import models
-from django.db import IntegrityError
-import random
 from django.utils import timezone
-from django.utils.text import slugify
+from .utils import slugify_instance_foodItem
 from django.db.models.signals import pre_save, post_save
 CATEGORY = (
         ("Raw Food", "Raw Food"),
@@ -19,7 +17,7 @@ class Donate(models.Model):
     donarEmail = models.EmailField(max_length=70, default="")
     phoneNum = models.CharField(max_length=70, default="")
     foodItem = models.CharField(max_length=50, default="")
-    slug= models.SlugField(null =True, blank = True)
+    slug= models.SlugField(unique= True, null =True, blank = True)
     fooDescription = models.CharField(max_length=400, default="")
     address = models.CharField(max_length=100, default="")
     timestamp = models.DateTimeField(auto_now_add =True)
@@ -45,7 +43,9 @@ def slugify_instance_foodItem(instance, save=False,new_slug =None):
         slug= new_slug
     else:
         slug = slugify(instance.foodItem)
-    qs = Donate.objects.filter(slug=slug).exclude(id = instance.id)
+
+    Klass = instance.__class__
+    qs = Klass.objects.filter(slug=slug).exclude(id = instance.id)
     if qs.exists():
         rand_int = random.randint(300_000,500_000)
         slug = f"{slug}-{rand_int}"
