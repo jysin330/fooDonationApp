@@ -21,7 +21,7 @@ urlpatterns = [
     path("home/", home),
     path("history/", history),
     path("meals/", meals),
-    path("meals/<int:id>", meals_detail),
+    path("meals/<slug:slug>", meals_detail),
     path("packedFood/", packedFood),
     path("request_meal/", request_meal),
     path("Receive/", Receive),

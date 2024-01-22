@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import Donate, ReceiverUser
 from .form import DonateForm, ReceiveForm
 from django.contrib.auth.decorators import login_required
-
+from django.http import Http404
 
 # Create your views here.
 def home(request):
@@ -35,8 +35,14 @@ def meals(request):
     return render(request, "fooDonationApp\meals.html", obj)
 
 #  Detail of the meal by Id and rendering to meal_detail page
-def meals_detail(request, id):
-    meal_object = Donate.objects.all().filter(id=id)
+def meals_detail(request, slug=None):
+    meal_object =None
+    if slug is not None:
+        try:
+            meal_object = Donate.objects.all().filter(slug=slug)
+        except Exception as e:
+            print(e)
+            raise Http404
     # meal_query = meal_object
     # print(meal_object)
     obj = {"object": meal_object}
