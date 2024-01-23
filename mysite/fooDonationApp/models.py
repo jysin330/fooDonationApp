@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from .utils import slugify_instance_foodItem
 from django.db.models.signals import pre_save, post_save
+from django.urls import reverse
 CATEGORY = (
         ("Raw Food", "Raw Food"),
         ("Packed Food", "Packed Food"),
@@ -27,7 +28,7 @@ class Donate(models.Model):
         return self.foodItem
 
     def get_absolute_url(self):
-         return f'/meals/{self.slug}'
+         return reverse('meal-detail', kwargs={"slug" : self.slug})
          
 
     # Where ever the save method is called these signals(pre_save and post_save) be called, including over-riding the save method is called.
