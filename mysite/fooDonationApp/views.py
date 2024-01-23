@@ -3,7 +3,6 @@ from .models import Donate, ReceiverUser
 from .form import DonateForm, ReceiveForm
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
-from django.db.models import Q
 # Create your views here.
 def home(request):
     return render(request, "fooDonationApp\home.html")
@@ -108,8 +107,9 @@ def search(request):
 
     qs = Donate.objects.all()
     if query is not None:
-        lookups = Q(foodItem__icontains =query) | Q(fooDescription__icontains =query) | Q(category__icontains =query)
-        qs = Donate.objects.filter(lookups)
+        qs = Donate.objects.search(query)
+        # lookups = Q(foodItem__icontains =query) | Q(fooDescription__icontains =query) | Q(category__icontains =query)
+        # qs = Donate.objects.filter(lookups)
         
     context = {"object": qs}
     return render(request, "fooDonationApp\search.html", context)

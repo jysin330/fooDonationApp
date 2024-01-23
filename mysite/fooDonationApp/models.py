@@ -3,11 +3,17 @@ from django.utils import timezone
 from .utils import slugify_instance_foodItem
 from django.db.models.signals import pre_save, post_save
 from django.urls import reverse
+from django.db.models import Q
 CATEGORY = (
         ("Raw Food", "Raw Food"),
         ("Packed Food", "Packed Food"),
         ("Cooked Food", "Cooked Food"),
     )
+
+class DonateManager(models.Manager):
+     def search(self,query):
+          lookups = Q(foodItem__icontains =query) | Q(fooDescription__icontains =query) | Q(category__icontains =query)
+          return Donate.objects.filter(lookups)
 # Create your models here.
 class Donate(models.Model):
   
@@ -24,6 +30,8 @@ class Donate(models.Model):
     timestamp = models.DateTimeField(auto_now_add =True)
     update = models.DateTimeField(auto_now =True)
     publish = models.DateField(auto_now_add = False, auto_now =False, default = timezone.now)
+    objects = DonateManager()
+
     def __str__(self):
         return self.foodItem
 
