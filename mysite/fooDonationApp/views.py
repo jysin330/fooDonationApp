@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Donate, ReceiverUser
 from .form import DonateForm, ReceiveForm
 from django.contrib.auth.decorators import login_required
@@ -22,6 +22,8 @@ def donate(request):
         context["form"] = DonateForm()
         context["object"] = donate_object
         context["created"] = True
+        return redirect(donate_object.get_absolute_url())
+        # return redirect('meal-detail', slug = donate_object.slug)
     return render(request, "fooDonationApp\donate.html", context)
 
 #  gathering all the donated food on the meal page
