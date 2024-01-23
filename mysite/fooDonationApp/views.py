@@ -99,15 +99,18 @@ def Receive(request):
 
 # This will take the query from the search bar And Filtering the data according to the query
 def search(request):
-    # converting query into integer either none
-    try:
-        query = request.GET.get("query")
-    except:
-        query = None
+    query = request.GET.get("query")
+    qs = Donate.objects.search(query =query)
 
-    qs = Donate.objects.all()
-    if query is not None:
-        qs = Donate.objects.search(query)
+    # converting query into integer either none
+    # try:
+    #     query = request.GET.get("query")
+    # except:
+    #     query = None
+
+    # qs = Donate.objects.all()
+    # if query is not None:
+    #     qs = Donate.objects.search(query)
         # lookups = Q(foodItem__icontains =query) | Q(fooDescription__icontains =query) | Q(category__icontains =query)
         # qs = Donate.objects.filter(lookups)
         

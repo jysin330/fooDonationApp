@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.query import QuerySet
 from django.utils import timezone
 from .utils import slugify_instance_foodItem
 from django.db.models.signals import pre_save, post_save
@@ -9,12 +10,22 @@ CATEGORY = (
         ("Packed Food", "Packed Food"),
         ("Cooked Food", "Cooked Food"),
     )
+class DonateQuerySet(models.QuerySet):
+     def search(self,query =None):
+          if query is None or query == "":
+               return self.none()
+          
+          lookups = Q(foodItem__icontains =query) | Q(fooDescription__icontains =query) | Q(category__icontains =query)
+          return self.filter(lookups)
+     
 
 class DonateManager(models.Manager):
-     def search(self,query):
-          lookups = Q(foodItem__icontains =query) | Q(fooDescription__icontains =query) | Q(category__icontains =query)
-          return Donate.objects.filter(lookups)
-# Create your models here.
+     def get_queryset(self):
+         return DonateQuerySet(self.model , using =self.db)
+     def search(self,query =None):
+          return self.get_queryset().search(query=query)
+     
+
 class Donate(models.Model):
   
     donar_id = models.AutoField
@@ -89,3 +100,13 @@ class ReceiverUser(models.Model):
     update = models.DateTimeField(auto_now =True)
     publish = models.DateField(auto_now_add = False, auto_now =False, default = timezone.now)
 
+
+# class DonateManager(models.Manager):
+#      def search(self,query =None):
+#           if query in None or "":
+#                return self.get_queryset().none()
+          
+#           lookups = Q(foodItem__icontains =query) | Q(fooDescription__icontains =query) | Q(category__icontains =query)
+#           return self.get_queryset().filter(lookups)
+        #   return Donate.objects.filter(lookups)
+# Create your models here.
