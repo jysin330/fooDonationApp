@@ -4,14 +4,16 @@
 {% block content %}
 
 {% for x in list %}
+    
     <h1><a href="/{{x.1}}">{{x.0}}</a></h1>
     {% for y in object %}
     {% if y.category == x.0 %}
-    
-    <h3><a href="/meals/{{y.slug}}">{{y.foodItem}}</a></h3>
-    {% endif %}
+    {{y.get_absolute_url}}
+    <h3><a href="{{y.get_absolute_url}}">{{y.foodItem}}</a></h3>
+    <!-- <h3><a href="/meals/{{y.slug}}">{{y.foodItem}}</a></h3>  -->
+    {% endif %} 
      
-    {%endfor%}
+    {%endfor%} 
 {%endfor%}
 {% endblock %}
 

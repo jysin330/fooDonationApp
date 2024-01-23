@@ -41,7 +41,7 @@ def meals_detail(request, slug=None):
         try:
             meal_object = Donate.objects.all().filter(slug=slug)
         except Exception as e:
-            print(e)
+           
             raise Http404
     # meal_query = meal_object
     # print(meal_object)

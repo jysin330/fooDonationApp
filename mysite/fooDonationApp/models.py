@@ -26,6 +26,9 @@ class Donate(models.Model):
     def __str__(self):
         return self.foodItem
 
+    def get_absolute_url(self):
+         return f'/meals/{self.slug}'
+         
 
     # Where ever the save method is called these signals(pre_save and post_save) be called, including over-riding the save method is called.
     def save(self,*args, **kwargs):
