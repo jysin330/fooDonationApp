@@ -4,6 +4,6 @@
 {% block content %}
 <h1>{{object.0.category}}</h1>
 {%for x in object%}
-<h3><a href="/meals/{{x.id}}">{{x.foodItem}}</a></h3>
+<h3><a href="/meals/{{x.slug}}">{{x.foodItem}}</a></h3>
 {%endfor%}
 {% endblock %}

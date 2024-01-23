@@ -8,7 +8,7 @@
     {% for y in object %}
     {% if y.category == x.0 %}
     
-    <h3><a href="/meals/{{y.id}}">{{y.foodItem}}</a></h3>
+    <h3><a href="/meals/{{y.slug}}">{{y.foodItem}}</a></h3>
     {% endif %}
      
     {%endfor%}
