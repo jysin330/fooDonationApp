@@ -91,9 +91,10 @@ class ReceiverUser(models.Model):
     #     if x.foodItem:
     #         temp.append((f"{x.foodItem}", f"{x.foodItem}"))
     # meal = tuple(temp)
+    receiver_meal = models.ForeignKey(Donate, blank = True, null= True , on_delete= models.SET_NULL)
     category = models.CharField(max_length=30, choices=CATEGORY, default="Raw Food")
     receiver_id = models.AutoField
-    receiver_meal = models.CharField(max_length=30, default="")
+    
     receiver_name = models.CharField(max_length=30)
     receiver_num = models.CharField(max_length=10, default="")
     receiver_email = models.CharField(max_length=50, default="")
