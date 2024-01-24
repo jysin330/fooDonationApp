@@ -29,7 +29,7 @@ class DonateManager(models.Manager):
 class Donate(models.Model):
   
     donar_id = models.AutoField
-
+    user = models.ForeignKey("auth.User", blank = True, null= True , on_delete= models.SET_NULL)
     category = models.CharField(max_length=30, choices=CATEGORY, default="Raw Food")
     donarName = models.CharField(max_length=20, default="")
     donarEmail = models.EmailField(max_length=70, default="")
