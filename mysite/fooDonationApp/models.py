@@ -5,11 +5,14 @@ from .utils import slugify_instance_foodItem
 from django.db.models.signals import pre_save, post_save
 from django.urls import reverse
 from django.db.models import Q
+from django.conf import settings
 CATEGORY = (
         ("Raw Food", "Raw Food"),
         ("Packed Food", "Packed Food"),
         ("Cooked Food", "Cooked Food"),
     )
+
+User = settings.AUTH_USER_MODEL
 class DonateQuerySet(models.QuerySet):
      def search(self,query =None):
           if query is None or query == "":
@@ -29,7 +32,7 @@ class DonateManager(models.Manager):
 class Donate(models.Model):
   
     donar_id = models.AutoField
-    user = models.ForeignKey("auth.User", blank = True, null= True , on_delete= models.SET_NULL)
+    user = models.ForeignKey(User, blank = True, null= True , on_delete= models.SET_NULL)
     category = models.CharField(max_length=30, choices=CATEGORY, default="Raw Food")
     donarName = models.CharField(max_length=20, default="")
     donarEmail = models.EmailField(max_length=70, default="")
