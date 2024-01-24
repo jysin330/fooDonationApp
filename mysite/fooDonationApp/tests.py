@@ -53,3 +53,9 @@ class DonateTestCase(TestCase):
 
         unique_slugs_list = list(set(slug_list))
         self.assertEqual(len(slug_list), len(unique_slugs_list))
+
+    def test_meal_search_manager(self):
+        qs = Donate.objects.search(query = "papdichart")
+        self.assertEqual(qs.count(), self.Number_of_foodItem)
+        qs = Donate.objects.search(query = "papdi")
+        self.assertEqual(qs.count(), self.Number_of_foodItem)
