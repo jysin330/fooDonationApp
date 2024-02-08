@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Donate, ReceiverUser
+from .models import DonateRecipe, ReceiverRecipe
 from .form import DonateForm, ReceiveForm
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
@@ -27,7 +27,7 @@ def donate(request):
 
 #  gathering all the donated food on the meal page
 def meals(request):
-    meal_object = Donate.objects.all()
+    meal_object = DonateRecipe.objects.all()
     # meal_query = meal_object
 
     obj = {"object": meal_object}
@@ -40,7 +40,7 @@ def meals_detail(request, slug=None):
     meal_object =None
     if slug is not None:
         try:
-            meal_object = Donate.objects.all().filter(slug=slug)
+            meal_object = DonateRecipe.objects.all().filter(slug=slug)
         except Exception as e:
            
             raise Http404
@@ -64,7 +64,7 @@ def request_meal(request):
 
 # Data collected for the Raw Food Detail
 def rawFood(request):
-    meal_object = Donate.objects.filter(category = 'Raw Food')
+    meal_object = DonateRecipe.objects.filter(category = 'Raw Food')
     context ={
         "object" : meal_object
     }
@@ -73,7 +73,7 @@ def rawFood(request):
 # Data collected for the Cooked Food Detail
 
 def cookedFood(request):
-    meal_object = Donate.objects.filter(category = "Cooked Food")
+    meal_object = DonateRecipe.objects.filter(category = "Cooked Food")
     context= {
         "object": meal_object
     }
@@ -82,14 +82,14 @@ def cookedFood(request):
 
 # # Data collected for the Packed Food Detail
 def packedFood(request):
-    meal_object = Donate.objects.filter(category = "Packed Food")
+    meal_object = DonateRecipe.objects.filter(category = "Packed Food")
     context ={
         "object": meals_detail
     }
     return render(request,  "fooDonationApp\details\packedFooDetail.html",context)
 
 def Receive(request):
-    receiver_object = ReceiverUser.objects.all()
+    receiver_object =ReceiverRecipe.objects.all()
     context = {
         "object": receiver_object
     }
@@ -100,7 +100,7 @@ def Receive(request):
 # This will take the query from the search bar And Filtering the data according to the query
 def search(request):
     query = request.GET.get("query")
-    qs = Donate.objects.search(query =query)
+    qs = DonateRecipe.objects.search(query =query)
 
     # converting query into integer either none
     # try:

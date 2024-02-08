@@ -29,7 +29,7 @@ class DonateManager(models.Manager):
           return self.get_queryset().search(query=query)
      
 
-class Donate(models.Model):
+class DonateRecipe(models.Model):
   
     donar_id = models.AutoField
     user = models.ForeignKey(User, blank = True, null= True , on_delete= models.SET_NULL)
@@ -71,7 +71,7 @@ def donate_pre_save(sender, instance, *args, **kwargs):
     if instance.slug is None:
             slugify_instance_foodItem(instance, save=False)
 
-pre_save.connect(donate_pre_save, sender= Donate)
+pre_save.connect(donate_pre_save, sender= DonateRecipe)
 
 def donate_post_save(sender, instance, created,*args, **kwargs):
     
@@ -79,19 +79,11 @@ def donate_post_save(sender, instance, created,*args, **kwargs):
         #  instance.slug = "This is the slug!!"
         slugify_instance_foodItem(instance, save=True)
 
-post_save.connect(donate_post_save, sender= Donate)
+post_save.connect(donate_post_save, sender= DonateRecipe)
 
 
-class ReceiverUser(models.Model):
-    # object_meal = Donate.objects.all()
-
-    # meal = ()
-    # temp = list(meal)
-    # for x in object_meal:
-    #     if x.foodItem:
-    #         temp.append((f"{x.foodItem}", f"{x.foodItem}"))
-    # meal = tuple(temp)
-    receiver_meal = models.ForeignKey(Donate, blank = True, null= True , on_delete= models.SET_NULL)
+class ReceiverRecipe(models.Model):
+    receiver_meal = models.ForeignKey(DonateRecipe, blank = True, null= True , on_delete= models.SET_NULL)
     category = models.CharField(max_length=30, choices=CATEGORY, default="Raw Food")
     receiver_id = models.AutoField
     
