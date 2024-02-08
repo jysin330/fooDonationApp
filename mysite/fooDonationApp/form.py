@@ -32,7 +32,7 @@ class ReceiveForm(forms.ModelForm):
             "receiver_num",
             "receiver_email",
             "receiver_address",
-            "des",
+            "description",
         ]
 
     def clean(self):

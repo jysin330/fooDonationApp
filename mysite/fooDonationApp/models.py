@@ -91,7 +91,7 @@ class ReceiverRecipe(models.Model):
     receiver_num = models.CharField(max_length=10, default="")
     receiver_email = models.CharField(max_length=50, default="")
     receiver_address = models.CharField(max_length=70)
-    des = models.TextField()
+    description = models.TextField()
     timestamp = models.DateTimeField(auto_now_add =True)
     update = models.DateTimeField(auto_now =True)
     publish = models.DateField(auto_now_add = False, auto_now =False, default = timezone.now)
