@@ -39,7 +39,7 @@ class DonateRecipe(models.Model):
     phoneNum = models.CharField(max_length=70, default="")
     foodItem = models.CharField(max_length=50, default="")
     slug= models.SlugField(unique= True, null =True, blank = True)
-    fooDescription = models.CharField(max_length=400, default="")
+    description = models.CharField(max_length=400, default="")
     address = models.CharField(max_length=100, default="")
     timestamp = models.DateTimeField(auto_now_add =True)
     update = models.DateTimeField(auto_now =True)
@@ -82,6 +82,18 @@ def donate_post_save(sender, instance, created,*args, **kwargs):
 post_save.connect(donate_post_save, sender= DonateRecipe)
 
 
+class RecipeIngredient(models.Model):
+     recipe =models.ForeignKey(DonateRecipe, on_delete = models.CASCADE)
+     name = models.CharField(max_length=250)
+     description = models.TextField(blank= True, null = True)
+     quantity = models.CharField(max_length = 50)
+     unit = models.CharField(max_length = 50) #lbs, oz, gram, pounds, etc
+     direction = models.TextField(blank= True, null = True)
+     timestamp = models.DateTimeField(auto_now_add = True)
+     updated = models.DateTimeField(auto_now = True)
+     
+
+
 class ReceiverRecipe(models.Model):
     receiver_meal = models.ForeignKey(DonateRecipe, blank = True, null= True , on_delete= models.SET_NULL)
     category = models.CharField(max_length=30, choices=CATEGORY, default="Raw Food")
@@ -95,6 +107,9 @@ class ReceiverRecipe(models.Model):
     timestamp = models.DateTimeField(auto_now_add =True)
     update = models.DateTimeField(auto_now =True)
     publish = models.DateField(auto_now_add = False, auto_now =False, default = timezone.now)
+
+
+
 
 
 # class DonateManager(models.Manager):

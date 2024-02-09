@@ -12,7 +12,7 @@ class DonateForm(forms.ModelForm):
             "donarEmail",
             "phoneNum",
             "foodItem",
-            "fooDescription",
+            "description",
             "address",
         ]
 
